@@ -5,20 +5,20 @@ import { createPortal } from 'react-dom';
 
 interface MovieModalProps {
   movie: Movie;
-  closeModal: () => void;
+  onClose: () => void;
 }
 
-const MovieModal = ({ movie, closeModal }: MovieModalProps) => {
+const MovieModal = ({ movie, onClose }: MovieModalProps) => {
   const handleBackdropClick = (event: React.MouseEvent<HTMLDivElement>) => {
     if (event.target === event.currentTarget) {
-      closeModal();
+      onClose();
     }
   };
 
   useEffect(() => {
     const handleKeyDown = (event: KeyboardEvent) => {
       if (event.key === 'Escape') {
-        closeModal();
+        onClose();
       }
     };
     document.body.style.overflow = 'hidden';
@@ -27,7 +27,7 @@ const MovieModal = ({ movie, closeModal }: MovieModalProps) => {
       document.body.style.overflow = '';
       document.removeEventListener('keydown', handleKeyDown);
     };
-  }, [closeModal]);
+  }, [onClose]);
 
   return createPortal(
     <div
@@ -39,7 +39,7 @@ const MovieModal = ({ movie, closeModal }: MovieModalProps) => {
       <div className={css.modal}>
         <button
           className={css.closeButton}
-          onClick={closeModal}
+          onClick={onClose}
           aria-label="Close modal"
         >
           &times;

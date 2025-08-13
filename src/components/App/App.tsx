@@ -36,7 +36,7 @@ const App = () => {
     setSelectedMovie(movie);
   };
 
-  const closeModal = () => {
+  const onClose = () => {
     setSelectedMovie(null);
   };
 
@@ -45,9 +45,7 @@ const App = () => {
       <SearchBar onSubmit={onSubmit} />
       {movies.length > 0 && <MovieGrid onSelect={onSelect} movies={movies} />}
       {isError && <ErrorMessage />}
-      {selectedMovie && (
-        <MovieModal closeModal={closeModal} movie={selectedMovie} />
-      )}
+      {selectedMovie && <MovieModal onClose={onClose} movie={selectedMovie} />}
       {isLoading && <Loader />}
     </div>
   );
